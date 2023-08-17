@@ -26,10 +26,10 @@ function Header() {
 
   return (
     <div className=" flex justify-around text-white text-xl">
-      {citys.map((item) => (
+      {citys.map((item, index) => (
         <button
           className="p-2 w-full hover:shadow-xl hover:shadow-white mt-4"
-          keys={item.id}
+          keys={index}
         >
           {item.name}
         </button>

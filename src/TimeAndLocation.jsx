@@ -1,11 +1,14 @@
+
 import React from "react";
 
-function TimeAndLocation() {
+function TimeAndLocation({ weather: { dt, timezoe, name, country, details } }) {
   return (
     <div className="flex flex-col items-center mt-4 text-xl font-medium text-white">
-      <div className="p-2">Local date | local time </div>
-      <div className="p-2"> Dhaka </div>
-      <div className="p-2"> Clear </div>
+      <div className="p-2">
+        {`${dt}`} | {`${timezoe}`}
+      </div>
+      <div className="p-2"> {`${name},${country}`} </div>
+      <div className="p-2"> {`${details}`} </div>
     </div>
   );
 }
