@@ -2,11 +2,25 @@ import React from 'react'
 import { UilSearch } from "@iconscout/react-unicons";
 import { UilMapMarker } from "@iconscout/react-unicons";
 
-function Search({ setQuery }) {
+function Search({ setQuery, units, setUnits }) {
   const [city, setCity] = React.useState("");
 
   const searchHandle = (e) => {
-    if (city !== "") setQuery({ q: city });
+    city !== "" && setQuery({ q: city });
+  };
+
+  const locationHandle = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        setQuery({ lat, lon });
+      });
+    }
+  };
+  const tempHandle = (e) => {
+    let x = e.currentTarget.name;
+    if (units !== x) setUnits(x);
   };
   return (
     <div className="flex items-center justify-around text-2xl text-white">
@@ -18,19 +32,33 @@ function Search({ setQuery }) {
           type="search"
           placeholder="search"
         />
-        <UilSearch onClick={searchHandle} className="transition ease-in-out hover:scale-125" />
+        <UilSearch
+          onClick={searchHandle}
+          className="transition ease-in-out hover:scale-125"
+        />
       </div>
       <div className="relative flex items-center h-8 rounded-full">
-        <UilMapMarker className="absolute inline-flex h-full rounded-full animate-ping hover:animate-none " />
+        <UilMapMarker
+          onClick={locationHandle}
+          className="absolute inline-flex h-full rounded-full animate-ping hover:animate-none "
+        />
         <UilMapMarker className="inline-flex h-8 rounded-full absoute " />
       </div>
 
       <div className="flex text-white">
-        <button className="p-2 hover:shadow-xl hover:shadow-white hover:rounded-full">
+        <button
+          name="metric"
+          onClick={tempHandle}
+          className="p-2 hover:shadow-xl hover:shadow-white hover:rounded-full"
+        >
           °C
         </button>
         <span className="p-2 m-auto">|</span>
-        <button className="p-2 hover:shadow-xl hover:shadow-white hover:rounded-full">
+        <button
+          name="imperial"
+          onClick={tempHandle}
+          className="p-2 hover:shadow-xl hover:shadow-white hover:rounded-full"
+        >
           °F
         </button>
       </div>
