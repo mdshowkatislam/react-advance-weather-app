@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Header() {
+function Header({ setQuery }) {
   const citys = [
     {
       id: 1,
@@ -8,7 +8,7 @@ function Header() {
     },
     {
       id: 2,
-      name: "Dilhi",
+      name: "Australia",
     },
     {
       id: 3,
@@ -16,7 +16,7 @@ function Header() {
     },
     {
       id: 4,
-      name: "Beijing",
+      name: "New York",
     },
     {
       id: 5,
@@ -25,10 +25,11 @@ function Header() {
   ];
 
   return (
-    <div className=" flex justify-around text-white text-xl">
+    <div className="flex justify-around text-xl text-white ">
       {citys.map((item, index) => (
         <button
-          className="p-2 w-full hover:shadow-xl hover:shadow-white mt-4"
+          onClick={() => setQuery({ q: item.name })}
+          className="w-full p-2 mt-4 hover:shadow-xl hover:shadow-white"
           keys={index}
         >
           {item.name}

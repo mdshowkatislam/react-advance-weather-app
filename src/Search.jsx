@@ -2,16 +2,23 @@ import React from 'react'
 import { UilSearch } from "@iconscout/react-unicons";
 import { UilMapMarker } from "@iconscout/react-unicons";
 
-function Search() {
+function Search({ setQuery }) {
+  const [city, setCity] = React.useState("");
+
+  const searchHandle = (e) => {
+    if (city !== "") setQuery({ q: city });
+  };
   return (
     <div className="flex items-center justify-around text-2xl text-white">
       <div className="flex items-center space-x-2 ">
         <input
-          className="text-black p-2 mt-2 text-xl hover:shadow-xl hover:shadow-slate-400 focus:outline-none capitalize"
+          value={city}
+          onChange={(e) => setCity(e.currentTarget.value)}
+          className="p-2 mt-2 text-xl text-black capitalize hover:shadow-xl hover:shadow-slate-400 focus:outline-none"
           type="search"
           placeholder="search"
         />
-        <UilSearch className="transition ease-in-out hover:scale-125" />
+        <UilSearch onClick={searchHandle} className="transition ease-in-out hover:scale-125" />
       </div>
       <div className="relative flex items-center h-8 rounded-full">
         <UilMapMarker className="absolute inline-flex h-full rounded-full animate-ping hover:animate-none " />
