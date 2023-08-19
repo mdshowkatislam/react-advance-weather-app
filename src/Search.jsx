@@ -1,7 +1,8 @@
 import React from 'react'
 import { UilSearch } from "@iconscout/react-unicons";
 import { UilMapMarker } from "@iconscout/react-unicons";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Search({ setQuery, units, setUnits }) {
   const [city, setCity] = React.useState("");
 
@@ -11,7 +12,9 @@ function Search({ setQuery, units, setUnits }) {
 
   const locationHandle = () => {
     if (navigator.geolocation) {
+      toast.info("--fetchig for user inpurt");
       navigator.geolocation.getCurrentPosition((position) => {
+        toast.success("##fetchig done for input");
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
         setQuery({ lat, lon });
