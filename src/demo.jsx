@@ -15,10 +15,10 @@ function Demo() {
   useEffect(() => {
     const fetchdata = async () => {
       const mess1 = query.q ? query.q : "Current Place";
-      toast.warn(" Fetchig the weather-" + mess1);
+      toast.warn(" Fetchig weather for-" + mess1);
       try {
         await getFormatedData({ ...query, units }).then((x) => {
-          toast.info(`Successful for ${x.name},${x.country}  `);
+          toast.info(`Successful for-${x.name},${x.country}  `);
           setWeather(x);
         });
       } catch (error) {
